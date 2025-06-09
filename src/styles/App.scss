@@ -1,3 +1,29 @@
-@use './core/reset';
+@use "./core/reset";
 
-/* Aquí van los estilos */
+
+html{
+    background-color: rgb(142, 150, 74);
+    color: white;
+}
+
+.title {
+  text-align: center;
+  padding-block: 2rem;
+}
+
+.form{
+   text-align: center;
+
+}
+.searchbox{
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.5rem;
+}
+.inputclass{
+    width: 20rem;
+    font-size: 1rem ;
+    text-align: center;
+     background-color: rgb(189, 206, 38);
+     color: rgb(75, 2, 2);
+}
