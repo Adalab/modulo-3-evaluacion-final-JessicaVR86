@@ -1,5 +1,4 @@
 import "../styles/App.scss";
-
 import { useEffect, useState } from "react";
 
 function App() {
@@ -21,22 +20,21 @@ function App() {
       <nav className="navsearch">
         <form className="form">
           <div>
-            <label htmlFor="filtercharacter" className="searchbox">
-              {" "}
-              Busca un personaje:{" "}
+            <label htmlFor="filtercharacter" className="labelbox">
+              Busca un personaje:
             </label>
             <input
               type="text"
               name="filtercharacter"
               id="filtercharacter"
-              className="inputclass"
+              className="inputbox"
             />
           </div>
           <div>
-            <label htmlFor="filterhouse" className="searchbox">
+            <label htmlFor="filterhouse" className="labelbox">
               Selecciona la casa:
             </label>
-            <select name="filterhouse" id="filterhouse" className="inputclass">
+            <select name="filterhouse" id="filterhouse" className="inputbox">
               <option value="Gryffindor">Gryffindor</option>
               <option value="Hufflepuff">Hufflepuff</option>
               <option value="Ravenclaw">Ravenclaw</option>
@@ -48,13 +46,23 @@ function App() {
 
       <main className="cardbox">
         <ul className="cardlist">
-          <li className="card">
-            
-            <figure>
-             
-              <img></img> <figcaption> {movies.name} </figcaption>
-            </figure>
-          </li>
+          {movies.map((eachCard) => (
+            <li key={eachCard.id} className="card">
+              <figure>
+                <img
+                  src={
+                    eachCard.image ||
+                    "https://placehold.co/210x295/ffffff/666666/?format=svg&text=Harry+Potter"  
+                  }  className="photo"
+                />
+                <figcaption className="textbox">
+                  
+                  <p> {eachCard.name}</p>
+                  <p>{eachCard.species} </p>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
         </ul>
       </main>
     </>
