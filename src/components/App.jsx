@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Filter from "./Filter";
 import List from "./List";
+import OneCard from "./OneCard";
+import { Link, Routes, Route } from "react-router";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -10,6 +12,7 @@ function App() {
     name: "",
     house: "",
     gender: "",
+    actor:"",
   });
 
   useEffect(() => {
@@ -43,9 +46,15 @@ function App() {
       <nav className="navsearch">
         <Filter handleInput={handleInput} filters={filters} />
       </nav>
-
       <main className="cardbox">
-        <List superFilter={superFilter} />
+        <Routes>
+          <Route
+            path="/"
+            element={<List filters={filters} superFilter={superFilter} />}
+          />
+          <Route path="/card/:id" element={<OneCard movies={movies} />} />
+          <Route path="*" element={<h3>Página no encontrada</h3>} />
+        </Routes>
       </main>
     </>
   );

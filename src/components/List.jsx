@@ -1,9 +1,11 @@
-function List({superFilter}) {
+import { Link } from "react-router";
+
+function List({ superFilter }) {
   return (
-    <>
-      <ul className="cardlist">
-        {superFilter.map((eachCard) => (
-          <li key={eachCard.id} className="card">
+    <ul className="cardlist">
+      {superFilter.map((eachCard) => (
+        <li key={eachCard.id} className="card">
+          <Link to={`/card/${eachCard.id}`} className="onecard" >
             <figure>
               <img
                 src={
@@ -17,10 +19,10 @@ function List({superFilter}) {
                 <p>{eachCard.species} </p>
               </figcaption>
             </figure>
-          </li>
-        ))}
-      </ul>
-    </>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 
