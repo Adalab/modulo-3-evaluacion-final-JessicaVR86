@@ -1,7 +1,9 @@
-function Header() {
+function Header(props) {
   return (
     <header>
-      <h1 className="title">Harry Potter</h1>
+    
+      <img src={props.logo} alt="Logo de Harry Potter" className="title"/>
+    
     </header>
   );
 }

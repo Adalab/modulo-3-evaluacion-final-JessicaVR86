@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Filter from "./Filter";
 import List from "./List";
-import OneCard from "./OneCard";
-import { Link, Routes, Route } from "react-router";
+import CharacterDetail from "./CharacterDetail";
+import { Routes, Route } from "react-router";
+import Logo from "../images/textHP.png";
+
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [filters, setFilters] = useState({
     name: "",
-    house: "",
+    house: "Gryffindor",
     gender: "",
-    actor:"",
+    actor: "",
   });
+  const [alertText, setAlertText] = useState("");
 
   useEffect(() => {
     fetch("https://hp-api.onrender.com/api/characters")
@@ -25,34 +28,57 @@ function App() {
 
   const handleInput = (ev) => {
     const { id, value } = ev.target;
-
     const newFilter = { ...filters, [id]: value };
     setFilters(newFilter);
+    if (value === "xxx") {
+      setAlertText("No existe ese nombre");
+    }
+  };
+
+  const handleReset = () => {
+    setFilters({
+      name: "",
+      house: "Gryffindor",
+      gender: "",
+      actor: "",
+    });
   };
 
   const superFilter = movies
-
     .filter((eachMovie) =>
       eachMovie.name.toLocaleLowerCase().includes(filters.name)
     )
     .filter((eachMovie) => eachMovie.house.includes(filters.house))
-
     .filter((eachMovie) => eachMovie.gender.includes(filters.gender));
 
   return (
     <>
-      <Header />
+      <Header  logo={Logo}  />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Filter
+              handleInput={handleInput}
+              handleReset={handleReset}
+              filters={filters}
+              alertText={alertText}
+            />
+          }
+        />
+      </Routes>
 
-      <nav className="navsearch">
-        <Filter handleInput={handleInput} filters={filters} />
-      </nav>
       <main className="cardbox">
         <Routes>
           <Route
             path="/"
             element={<List filters={filters} superFilter={superFilter} />}
           />
-          <Route path="/card/:id" element={<OneCard movies={movies} />} />
+
+          <Route
+            path="/card/:id"
+            element={<CharacterDetail movies={movies} />}
+          />
           <Route path="*" element={<h3>Página no encontrada</h3>} />
         </Routes>
       </main>
