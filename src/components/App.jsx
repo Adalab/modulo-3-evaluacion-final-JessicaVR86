@@ -46,8 +46,7 @@ function App() {
 
   const superFilter = movies
     .filter((eachMovie) =>
-      eachMovie.name.toLowerCase().includes(filters.name)
-    )
+      eachMovie.name.toLowerCase().includes(filters.name.toLowerCase()))
     .filter((eachMovie) => eachMovie.house.includes(filters.house))
     .filter((eachMovie) => eachMovie.gender.includes(filters.gender));
 
